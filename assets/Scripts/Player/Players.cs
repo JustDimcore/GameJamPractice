@@ -6,7 +6,7 @@ namespace Player
 {
     public static class Players
     {
-        public static void Spawn(int count, GameObject prefab, List<Transform> spawnPoints, ref List<PlayerControl> controls)
+        public static void Spawn(int count, GameObject prefab, List<Transform> spawnPoints, List<PlayerControl> controls)
         {
             for (var i = 0; i < count; i++)
             {
@@ -17,7 +17,7 @@ namespace Player
             }
         }
 
-        public static void Clear(ref List<PlayerControl> controls)
+        public static void Clear(List<PlayerControl> controls)
         {
             foreach (var control in controls)
                 Object.Destroy(control.gameObject);

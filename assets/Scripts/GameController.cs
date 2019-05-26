@@ -7,24 +7,22 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    [Header("Camera")]
+    public Camera LevelCamera;
+
     [Header("Preset fields")]
-    public List<Spawner> MobSpawners;
     public List<Blender> Blenders;
 
     [Header("Mobs")]
     public GameObject MobPrefab;
+    public List<Spawner> MobSpawners;
+    private readonly List<MobController> _mobs = new List<MobController>();
 
     [Header("Players")]
-    [Range(1,4)]public int PlayersCount;
+    [Range(1,4)] public int PlayersCount;
     public GameObject PlayerPrefab;
     public List<Transform> PlayersSpawnPoints;
-    private List<PlayerControl> _players = new List<PlayerControl>();
-
-    [Header("Runtime fields")]
-    public List<MobController> Mobs;
-
-    [Header("Camera")]
-    public Camera LevelCamera;
+    private readonly List<PlayerControl> _players = new List<PlayerControl>();
 
     private void Awake()
     {
@@ -44,7 +42,7 @@ public class GameController : MonoBehaviour
 
     private void ClearOldGame()
     {
-        Players.Clear(ref _players);
+        Players.Clear(_players);
 
         // TODO: Remove mobs
         // TODO: Remove body parts
@@ -54,7 +52,7 @@ public class GameController : MonoBehaviour
 
     private void StartNewGame()
     {
-        Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, ref _players);
+        Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, _players);
 
         // TODO: Start mobs spawning
         SpawnMob();
@@ -72,7 +70,7 @@ public class GameController : MonoBehaviour
     {
         var go = Instantiate(MobPrefab);
         var mob = go.GetComponent<MobController>();
-        Mobs.Add(mob);
+        _mobs.Add(mob);
 
         var spawnerIndex = Random.Range(0, MobSpawners.Count - 1);
         var spawner = MobSpawners[spawnerIndex];
@@ -86,7 +84,7 @@ public class GameController : MonoBehaviour
     public void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
-        Mobs.Remove(mob);
+        _mobs.Remove(mob);
         Destroy(mob.gameObject);
 
         // TODO: Create new one in another
