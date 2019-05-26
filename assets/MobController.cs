@@ -8,7 +8,7 @@ public class MobController : MonoBehaviour
     public NavMeshAgent Agent;
 
 
-    public void MoveOnPath(NavMeshPath path)
+    public void Move(NavMeshPath path)
     {
         Agent.SetPath(path);
         // Agent.isStopped = false;

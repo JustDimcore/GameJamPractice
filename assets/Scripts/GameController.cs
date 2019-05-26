@@ -1,15 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     
+    [Header("Preset fields")]
     public List<Transform> MobSpawnPoints;
     public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
 
+    [Space(20f)] 
+    public GameObject MobPrefab;
+    public GameObject PlayerPrefab;
+
+    [Space(20)] 
+    [Header("Runtime fields")] 
+    // TODO: public List<PlayerController> Players;
+    public List<MobController> Mobs;
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -45,16 +57,31 @@ public class GameController : MonoBehaviour
         // TODO: Create new
     }
 
+    [ContextMenu("SpawnMob")]
     private void SpawnMob()
     {
+        var go = Instantiate(MobPrefab);
+        var mob = go.GetComponent<MobController>();
+        Mobs.Add(mob);        
+        
+        var path = new NavMeshPath();
+        // TODO: Fill path
+        
+        mob.Move(path);
+        
         // TODO: Create path
         // TODO: Create mob
     }
     
     // Remove when he comes to door
-    private void OnMobExit()
+    private void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
+        Mobs.Remove(mob);
+        Destroy(mob.gameObject);
+        
         // TODO: Create new one in another
+        // TODO: Maybe wait some time before spawn
+        SpawnMob();
     }
 }
