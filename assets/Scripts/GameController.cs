@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MeatResources;
 using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -24,6 +25,14 @@ public class GameController : MonoBehaviour
     public List<Transform> PlayersSpawnPoints;
     private readonly List<PlayerControl> _players = new List<PlayerControl>();
 
+    [Header("Meats")]
+    public Transform MeatsParent;
+    public GameObject MeatPrefab;
+    [Range(1, 10)] public int MeatsCount;
+    [Range(1, 3)] public float MeatDistance;
+    [Range(1, 10)] public float MeatForce;
+    private readonly List<Meat> _meats = new List<Meat>();
+
     private void Awake()
     {
         Instance = this;
@@ -31,10 +40,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        InitGame();
+        Restart();
     }
 
-    private void InitGame()
+    public void Restart()
     {
         ClearOldGame();
         StartNewGame();
@@ -45,7 +54,7 @@ public class GameController : MonoBehaviour
         Players.Clear(_players);
 
         // TODO: Remove mobs
-        // TODO: Remove body parts
+        Meats.Clear(_meats);
         // TODO: Disable laser
         // TODO: Clear statistics
     }
@@ -57,6 +66,11 @@ public class GameController : MonoBehaviour
         // TODO: Start mobs spawning
         SpawnMob();
         // TODO: Start laser spawning
+    }
+
+    public void AddMeat()
+    {
+        Meats.Spawn(MeatsCount, MeatPrefab, MeatsParent, _mobs, _meats);
     }
 
     private void RecreateCharacter(int playerIndex)
