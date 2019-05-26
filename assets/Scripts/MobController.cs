@@ -51,6 +51,11 @@ public class MobController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: Process door trigger
+        Debug.Log("Reached trigger");
+        if (_path.ExitArea == other)
+        {
+            Debug.Log("Reached needed trigger");
+            GameController.Instance.OnMobExit(this);
+        }
     }
 }

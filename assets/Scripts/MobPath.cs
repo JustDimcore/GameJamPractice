@@ -4,4 +4,5 @@ using UnityEngine;
 public class MobPath : MonoBehaviour
 {
     public List<Transform> Waypoints;
+    public BoxCollider ExitArea;
 }

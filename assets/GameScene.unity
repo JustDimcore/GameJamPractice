@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 47106001}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MobExitAreas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 162780140}
   - component: {fileID: 162780139}
   - component: {fileID: 162780138}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,7 +1660,7 @@ GameObject:
   - component: {fileID: 376651289}
   - component: {fileID: 376651288}
   - component: {fileID: 376651287}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2832,6 +2832,7 @@ MonoBehaviour:
   - {fileID: 991362470}
   - {fileID: 1383397196}
   - {fileID: 482175392}
+  ExitArea: {fileID: 1757171731}
 --- !u!1 &664589033
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,6 +2982,7 @@ MonoBehaviour:
   - {fileID: 1017823012}
   - {fileID: 807195487}
   - {fileID: 1815914045}
+  ExitArea: {fileID: 1065296555}
 --- !u!1 &722842271
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,6 +3072,7 @@ MonoBehaviour:
   - {fileID: 2142566445}
   - {fileID: 1248722909}
   - {fileID: 1679972376}
+  ExitArea: {fileID: 1065296555}
 --- !u!1001 &756474647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4168,6 +4171,7 @@ MonoBehaviour:
   - {fileID: 67291494}
   - {fileID: 406522246}
   - {fileID: 1126875512}
+  ExitArea: {fileID: 162780138}
 --- !u!1 &919824151
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,7 +4978,7 @@ GameObject:
   - component: {fileID: 1065296557}
   - component: {fileID: 1065296556}
   - component: {fileID: 1065296555}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6209,6 +6213,7 @@ MonoBehaviour:
   - {fileID: 1834196575}
   - {fileID: 1745006515}
   - {fileID: 1054352065}
+  ExitArea: {fileID: 1065296555}
 --- !u!1001 &1279024125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6483,6 +6488,7 @@ MonoBehaviour:
   - {fileID: 2134808986}
   - {fileID: 1222460224}
   - {fileID: 1216820428}
+  ExitArea: {fileID: 1552343552}
 --- !u!1 &1355433428
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,7 +6896,7 @@ GameObject:
   - component: {fileID: 1552343554}
   - component: {fileID: 1552343553}
   - component: {fileID: 1552343552}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7796,7 +7802,7 @@ GameObject:
   - component: {fileID: 1757171733}
   - component: {fileID: 1757171732}
   - component: {fileID: 1757171731}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
     }
     
     // Remove mob when he comes to a door
-    private void OnMobExit(MobController mob)
+    public void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
         Mobs.Remove(mob);
