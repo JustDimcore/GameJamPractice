@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
+    
     public List<Transform> MobSpawnPoints;
     public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
-    
-    
-    void Start()
-    {
-        
-    }
 
-    void Update()
+    private void Awake()
     {
-        
+        Instance = this;
     }
 
     void InitGame()
