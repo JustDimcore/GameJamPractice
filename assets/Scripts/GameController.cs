@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public List<Transform> MobSpawnPoints;
+    public List<Transform> PlayersSpawnPoints;
+    public List<Blender> Blenders;
+    
+    
     void Start()
     {
         
