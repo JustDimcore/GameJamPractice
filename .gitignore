@@ -8,3 +8,4 @@ Assembly-CSharp.csproj
 .idea/
 assets/Plugins/Editor/JetBrains/
 assets/Plugins/Editor/JetBrains.meta
+*.csproj
