@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,8 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     
     [Header("Preset fields")]
-    public List<Transform> MobSpawnPoints;
-    public List<Transform> MobExitPoints;
+    public List<Spawner> MobSpawners;
     public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
 
@@ -25,7 +23,6 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        MobExitPoints = MobSpawnPoints;
     }
 
     void InitGame()
