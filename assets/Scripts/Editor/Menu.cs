@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
             GameController.Instance.Restart();
     }
 
-    [MenuItem("[ MENU ]/AddMeat", false, 100)]
+    [MenuItem("[ MENU ]/AddMeat _m", false, 100)]
     public static void AddMeat()
     {
         if (EditorApplication.isPlaying)
