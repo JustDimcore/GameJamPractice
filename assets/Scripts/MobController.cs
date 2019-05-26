@@ -9,6 +9,7 @@ public class MobController : MonoBehaviour
     
     private int _pointIndex = 0;
     private MobPath _path;
+    private bool _pathDone;
 
     
     public void Move(MobPath path)
@@ -19,7 +20,7 @@ public class MobController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsDestinationReached())
+        if (!_pathDone || IsDestinationReached())
         {
             Debug.Log("Destination reached: " + _pointIndex);
             if (_pointIndex < _path.Waypoints.Count - 1)
@@ -29,6 +30,7 @@ public class MobController : MonoBehaviour
             }
             else
             {
+                _pathDone = true;
                 Debug.Log("Path done");
             }
         }
