@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using MeatResources;
 using Player;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class GameController : MonoBehaviour
 
     [Header("Preset fields")]
     public List<Blender> Blenders;
+    public int MobsLimit = 1;
+    public float MobSpawningInterval = 1;
 
     [Header("Mobs")]
     public GameObject MobPrefab;
@@ -33,6 +36,8 @@ public class GameController : MonoBehaviour
     [Range(1, 10)] public float MeatForce;
     private readonly List<Meat> _meats = new List<Meat>();
 
+    private Coroutine _spawnCoroutine;
+
     private void Awake()
     {
         Instance = this;
@@ -52,6 +57,9 @@ public class GameController : MonoBehaviour
     private void ClearOldGame()
     {
         Players.Clear(_players);
+        _mobs.Clear();
+        if(_spawnCoroutine != null)
+            StopCoroutine(_spawnCoroutine);
 
         // TODO: Remove mobs
         Meats.Clear(_meats);
@@ -64,13 +72,26 @@ public class GameController : MonoBehaviour
         Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, _players);
 
         // TODO: Start mobs spawning
-        SpawnMob();
+        
+        _spawnCoroutine = StartCoroutine(SpawnCoroutine());
         // TODO: Start laser spawning
     }
-
+    
     public void AddMeat()
     {
         Meats.Spawn(MeatsCount, MeatPrefab, MeatsParent, _mobs, _meats);
+    }
+
+    private IEnumerator SpawnCoroutine()
+    {
+        while (true)
+        {
+            if (_mobs.Count < MobsLimit)
+            {
+                SpawnMob();
+            }
+            yield return new WaitForSeconds(MobSpawningInterval);
+        }
     }
 
     private void RecreateCharacter(int playerIndex)
@@ -86,9 +107,9 @@ public class GameController : MonoBehaviour
         var mob = go.GetComponent<MobController>();
         _mobs.Add(mob);
 
-        var spawnerIndex = Random.Range(0, MobSpawners.Count - 1);
+        var spawnerIndex = Random.Range(0, MobSpawners.Count);
         var spawner = MobSpawners[spawnerIndex];
-        var pathIndex = Random.Range(0, spawner.Paths.Count - 1);
+        var pathIndex = Random.Range(0, spawner.Paths.Count);
         var path = spawner.Paths[pathIndex];
         mob.Agent.Warp(spawner.SpawnPoint.position);
         mob.Move(path);
@@ -103,6 +124,5 @@ public class GameController : MonoBehaviour
 
         // TODO: Create new one in another
         // TODO: Maybe wait some time before spawn
-        SpawnMob();
     }
 }

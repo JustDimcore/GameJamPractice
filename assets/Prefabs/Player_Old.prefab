@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 7914159780657363231}
   - component: {fileID: 7881919138863520091}
   - component: {fileID: 7796273473470399530}
+  - component: {fileID: 6460286472178287978}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1390,3 +1391,19 @@ MonoBehaviour:
   TurnSensitivity: 20
   MoveSpeed: 2
   JumpForce: 4
+--- !u!208 &6460286472178287978
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797866553215805579}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.3, y: 0.5, z: 0.3}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5
