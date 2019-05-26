@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -62,16 +62,14 @@ public class GameController : MonoBehaviour
         var mob = go.GetComponent<MobController>();
         Mobs.Add(mob);        
         
-        var path = new NavMeshPath();
-        // TODO: Fill path
-        
+        var spawnerIndex = Random.Range(0, MobSpawners.Count - 1);
+        var spawner = MobSpawners[spawnerIndex];
+        var pathIndex = Random.Range(0, spawner.Paths.Count - 1);
+        var path = spawner.Paths[pathIndex];
         mob.Move(path);
-        
-        // TODO: Create path
-        // TODO: Create mob
     }
     
-    // Remove when he comes to door
+    // Remove mob when he comes to a door
     private void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
