@@ -1,3 +1,10 @@
 Temp/
 Library/
 Logs/
+obj/
+repo.sln.DotSettings.user
+repo.sln
+Assembly-CSharp.csproj
+.idea/
+assets/Plugins/Editor/JetBrains/
+assets/Plugins/Editor/JetBrains.meta
