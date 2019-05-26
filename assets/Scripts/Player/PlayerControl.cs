@@ -35,7 +35,7 @@ namespace Player
         private void Update()
         {
             Move();
-            JumpingAndLanding();
+            //JumpingAndLanding();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -114,6 +114,10 @@ namespace Player
                 transform.position += _currentDirection * MoveSpeed * Time.deltaTime;
 
                 _animator.SetFloat("MoveSpeed", direction.magnitude);
+            }
+            else
+            {
+                _animator.SetFloat("MoveSpeed", 0f);
             }
         }
 

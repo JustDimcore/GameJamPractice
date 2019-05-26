@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2721301}
   m_Layer: 10
-  m_Name: PlayersSpawnPoints
+  m_Name: Players
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4587,7 +4587,7 @@ MonoBehaviour:
   MobSpawners:
   - {fileID: 1959579055}
   PlayersCount: 1
-  PlayerPrefab: {fileID: 7797866553215805579, guid: 5aec45774a57f3745b91e1bb0c8c81ab,
+  PlayerPrefab: {fileID: 1411637210284139644, guid: 271597fb98826814ea74e9949d58da00,
     type: 3}
   PlayersSpawnPoints:
   - {fileID: 1562501692}
