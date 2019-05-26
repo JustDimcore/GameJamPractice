@@ -1387,6 +1387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 1
-  TurnSensitivity: 30
+  TurnSensitivity: 20
   MoveSpeed: 2
-  _jumpForce: 4
+  JumpForce: 4

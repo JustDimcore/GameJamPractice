@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,15 +9,18 @@ public class GameController : MonoBehaviour
 
     [Header("Preset fields")]
     public List<Spawner> MobSpawners;
-    public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
 
-    [Header("Prefabs")]
+    [Header("Mobs")]
     public GameObject MobPrefab;
+
+    [Header("Players")]
+    [Range(1,4)]public int PlayersCount;
     public GameObject PlayerPrefab;
+    public List<Transform> PlayersSpawnPoints;
+    private List<PlayerControl> _players = new List<PlayerControl>();
 
     [Header("Runtime fields")]
-    // TODO: public List<PlayerController> Players;
     public List<MobController> Mobs;
 
     [Header("Camera")]
@@ -29,10 +33,10 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        StartNewGame();
+        InitGame();
     }
 
-    void InitGame()
+    private void InitGame()
     {
         ClearOldGame();
         StartNewGame();
@@ -40,9 +44,8 @@ public class GameController : MonoBehaviour
 
     private void ClearOldGame()
     {
-        // TODO: Clear old objects and states
+        Players.Clear(ref _players);
 
-        // TODO: Remove characters
         // TODO: Remove mobs
         // TODO: Remove body parts
         // TODO: Disable laser
@@ -51,7 +54,8 @@ public class GameController : MonoBehaviour
 
     private void StartNewGame()
     {
-        // TODO: Create characters
+        Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, ref _players);
+
         // TODO: Start mobs spawning
         SpawnMob();
         // TODO: Start laser spawning
@@ -69,7 +73,7 @@ public class GameController : MonoBehaviour
         var go = Instantiate(MobPrefab);
         var mob = go.GetComponent<MobController>();
         Mobs.Add(mob);
-        
+
         var spawnerIndex = Random.Range(0, MobSpawners.Count - 1);
         var spawner = MobSpawners[spawnerIndex];
         var pathIndex = Random.Range(0, spawner.Paths.Count - 1);
@@ -77,14 +81,14 @@ public class GameController : MonoBehaviour
         mob.Agent.Warp(spawner.SpawnPoint.position);
         mob.Move(path);
     }
-    
+
     // Remove mob when he comes to a door
     public void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
         Mobs.Remove(mob);
         Destroy(mob.gameObject);
-        
+
         // TODO: Create new one in another
         // TODO: Maybe wait some time before spawn
         SpawnMob();
