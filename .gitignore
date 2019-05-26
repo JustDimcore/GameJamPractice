@@ -9,3 +9,6 @@ Assembly-CSharp.csproj
 assets/Plugins/Editor/JetBrains/
 assets/Plugins/Editor/JetBrains.meta
 *.csproj
+GameJamPractice.sln.DotSettings
+GameJamPractice.sln.DotSettings.user
+GameJamPractice.sln
