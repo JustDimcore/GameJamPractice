@@ -9679,7 +9679,7 @@ PrefabInstance:
     - target: {fileID: 4281010582968483798, guid: 2be80154842c4de46a6164bb48a79213,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 4281010582968483798, guid: 2be80154842c4de46a6164bb48a79213,
         type: 3}
@@ -9689,7 +9689,7 @@ PrefabInstance:
     - target: {fileID: 4281010582968483798, guid: 2be80154842c4de46a6164bb48a79213,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.2
+      value: -14.09
       objectReference: {fileID: 0}
     - target: {fileID: 4281010582968483798, guid: 2be80154842c4de46a6164bb48a79213,
         type: 3}
@@ -9735,6 +9735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 20535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281010582968483797, guid: 2be80154842c4de46a6164bb48a79213,
+        type: 3}
+      propertyPath: orthographic size
+      value: 4.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be80154842c4de46a6164bb48a79213, type: 3}
