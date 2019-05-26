@@ -5,7 +5,8 @@ using UnityEngine.AI;
 public class MobController : MonoBehaviour
 {
     public NavMeshAgent Agent;
-
+    public float ChangeDirectionDistance;
+    
     private int _pointIndex = 0;
     private MobPath _path;
 
@@ -24,6 +25,7 @@ public class MobController : MonoBehaviour
             if (_pointIndex < _path.Waypoints.Count - 1)
             {
                 _pointIndex++;
+                Agent.SetDestination(_path.Waypoints[_pointIndex].position);
             }
             else
             {
@@ -36,13 +38,9 @@ public class MobController : MonoBehaviour
     {
         if (!Agent.pathPending)
         {
-            if (Agent.remainingDistance <= Agent.stoppingDistance)
+            if (Agent.remainingDistance <= ChangeDirectionDistance || Agent.remainingDistance <= Agent.stoppingDistance)
             {
-                if (!Agent.hasPath || Math.Abs(Agent.velocity.sqrMagnitude) < 0.000001f)
-                {
-                    // Done
-                    return true;
-                }
+                return true;
             }
         }
 

@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - InvisibleRobotWall
-  - InvisibleHumanWall
-  - Invisible
+  - RobotWall
+  - HumanWall
+  - Gizmos
   - Robots
   - Mobs
-  - 
+  - EscapeArea
   - 
   - 
   - 

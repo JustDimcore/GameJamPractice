@@ -27,6 +27,11 @@ public class GameController : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        StartNewGame();
+    }
+
     void InitGame()
     {
         ClearOldGame();
@@ -48,6 +53,7 @@ public class GameController : MonoBehaviour
     {
         // TODO: Create characters
         // TODO: Start mobs spawning
+        SpawnMob();
         // TODO: Start laser spawning
     }
 
@@ -62,12 +68,13 @@ public class GameController : MonoBehaviour
     {
         var go = Instantiate(MobPrefab);
         var mob = go.GetComponent<MobController>();
-        Mobs.Add(mob);        
+        Mobs.Add(mob);
         
         var spawnerIndex = Random.Range(0, MobSpawners.Count - 1);
         var spawner = MobSpawners[spawnerIndex];
         var pathIndex = Random.Range(0, spawner.Paths.Count - 1);
         var path = spawner.Paths[pathIndex];
+        mob.Agent.Warp(spawner.SpawnPoint.position);
         mob.Move(path);
     }
     
