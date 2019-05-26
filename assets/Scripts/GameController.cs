@@ -9,14 +9,14 @@ public class GameController : MonoBehaviour
     
     [Header("Preset fields")]
     public List<Transform> MobSpawnPoints;
+    public List<Transform> MobExitPoints;
     public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
 
-    [Space(20f)] 
+    [Header("Prefabs")] 
     public GameObject MobPrefab;
     public GameObject PlayerPrefab;
 
-    [Space(20)] 
     [Header("Runtime fields")] 
     // TODO: public List<PlayerController> Players;
     public List<MobController> Mobs;
@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        MobExitPoints = MobSpawnPoints;
     }
 
     void InitGame()

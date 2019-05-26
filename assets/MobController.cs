@@ -7,6 +7,10 @@ public class MobController : MonoBehaviour
 {
     public NavMeshAgent Agent;
 
+    private void Start()
+    {
+        // TODO: Init agent params
+    }
 
     public void Move(NavMeshPath path)
     {
