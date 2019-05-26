@@ -1301,10 +1301,9 @@ GameObject:
   - component: {fileID: 7850276205720011195}
   - component: {fileID: 7914159780657363231}
   - component: {fileID: 7881919138863520091}
-  - component: {fileID: 7900719808188716213}
   - component: {fileID: 7796273473470399530}
   m_Layer: 0
-  m_Name: Player_1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1352,7 +1351,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
+  m_Radius: 0.3
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -1375,24 +1374,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7900719808188716213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7797866553215805579}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ca30c36b506c64aafa127f12f968fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_moveSpeed: 2
-  m_turnSpeed: 200
-  m_jumpForce: 4
-  m_animator: {fileID: 7881919138863520091}
-  m_rigidBody: {fileID: 7850276205720011195}
-  m_controlMode: 0
 --- !u!114 &7796273473470399530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1405,8 +1386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08fbd1b4dd4f0b40a92f82b9d8e1876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 1
-  animator: {fileID: 7881919138863520091}
-  Rigidbody: {fileID: 7850276205720011195}
+  playerId: 1
+  TurnSensitivity: 30
   MoveSpeed: 2
   _jumpForce: 4

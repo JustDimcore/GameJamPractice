@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Player
 {
@@ -17,24 +18,78 @@ namespace Player
         private Vector3 _currentDirection = Vector3.zero;
 
         [Header("Jumping")]
-        [SerializeField] private float _jumpForce = 4;
+        [SerializeField] private float JumpForce = 4;
         private const float MinJumpInterval = 0.25f;
         private float _jumpTimeStamp;
         private bool _isGrounded = true;
         private bool _wasGrounded;
+        private readonly List<Collider> _collisions = new List<Collider>();
 
-        private void Awake()
+        private void Start()
         {
             _animator = GetComponent<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
-            _cameraTransform = Camera.main.transform;
+            _cameraTransform = GameController.Instance.LevelCamera.transform;
         }
 
         private void Update()
         {
-            _animator.SetBool("Grounded", _isGrounded);
             Move();
             JumpingAndLanding();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var contactPoints = collision.contacts;
+            foreach (var contact in contactPoints)
+            {
+                if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+                {
+                    if (!_collisions.Contains(collision.collider))
+                        _collisions.Add(collision.collider);
+
+                    _isGrounded = true;
+                }
+            }
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            var contactPoints = collision.contacts;
+            var validSurfaceNormal = false;
+
+            foreach (var contact in contactPoints)
+            {
+                if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+                {
+                    validSurfaceNormal = true;
+                    break;
+                }
+            }
+
+            if (validSurfaceNormal)
+            {
+                _isGrounded = true;
+                if (!_collisions.Contains(collision.collider))
+                    _collisions.Add(collision.collider);
+            }
+            else
+            {
+                if (_collisions.Contains(collision.collider))
+                    _collisions.Remove(collision.collider);
+
+                if (_collisions.Count == 0)
+                    _isGrounded = false;
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (_collisions.Contains(collision.collider))
+                _collisions.Remove(collision.collider);
+
+            if (_collisions.Count == 0)
+                _isGrounded = false;
         }
 
         private void Move()
@@ -64,11 +119,13 @@ namespace Player
 
         private void JumpingAndLanding()
         {
+            _animator.SetBool("Grounded", _isGrounded);
+
             var jumpCooldownIsOver = (Time.time - _jumpTimeStamp) >= MinJumpInterval;
             if (jumpCooldownIsOver && _isGrounded && InputController.Jump(playerId))
             {
                 _jumpTimeStamp = Time.time;
-                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+                _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             }
 
             if (!_wasGrounded && _isGrounded)

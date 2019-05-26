@@ -57,13 +57,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="assets\Blender.cs" />
     <Compile Include="assets\LoadedAssets\Supercyan Character Pack Free Sample\Scripts\CameraLogic.cs" />
     <Compile Include="assets\LoadedAssets\Supercyan Character Pack Free Sample\Scripts\Demo.cs" />
     <Compile Include="assets\LoadedAssets\Supercyan Character Pack Free Sample\Scripts\SimpleCharacterControl.cs" />
+    <Compile Include="assets\MobController.cs" />
+    <Compile Include="assets\MobPath.cs" />
     <Compile Include="assets\Scripts\GameController.cs" />
     <Compile Include="assets\Scripts\Player\InputController.cs" />
     <Compile Include="assets\Scripts\Player\PlayerControl.cs" />
     <Compile Include="assets\Scripts\Player\PlayerId.cs" />
+    <Compile Include="assets\TriggerHandler.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/GameJam/GameJamPractice/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -634,6 +638,24 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>E:/Program Files/Unity2018.4.0f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
+      <Project>{880456E6-FF9B-FC5C-0E57-A6321190504F}</Project>
+      <Name>NavMeshComponentsExamplesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}</Project>
+      <Name>NavMeshComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamples.csproj">
+      <Project>{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}</Project>
+      <Name>NavMeshComponentsExamples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

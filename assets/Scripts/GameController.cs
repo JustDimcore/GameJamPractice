@@ -5,21 +5,23 @@ using UnityEngine.AI;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
-    
+
     [Header("Preset fields")]
     public List<Spawner> MobSpawners;
     public List<Transform> PlayersSpawnPoints;
     public List<Blender> Blenders;
 
-    [Header("Prefabs")] 
+    [Header("Prefabs")]
     public GameObject MobPrefab;
     public GameObject PlayerPrefab;
 
-    [Header("Runtime fields")] 
+    [Header("Runtime fields")]
     // TODO: public List<PlayerController> Players;
     public List<MobController> Mobs;
-    
-    
+
+    [Header("Camera")]
+    public Camera LevelCamera;
+
     private void Awake()
     {
         Instance = this;
@@ -34,7 +36,7 @@ public class GameController : MonoBehaviour
     private void ClearOldGame()
     {
         // TODO: Clear old objects and states
-        
+
         // TODO: Remove characters
         // TODO: Remove mobs
         // TODO: Remove body parts
@@ -60,24 +62,24 @@ public class GameController : MonoBehaviour
     {
         var go = Instantiate(MobPrefab);
         var mob = go.GetComponent<MobController>();
-        Mobs.Add(mob);        
-        
+        Mobs.Add(mob);
+
         var path = new NavMeshPath();
         // TODO: Fill path
-        
+
         mob.Move(path);
-        
+
         // TODO: Create path
         // TODO: Create mob
     }
-    
+
     // Remove when he comes to door
     private void OnMobExit(MobController mob)
     {
         // TODO: Remove character, which comes to door
         Mobs.Remove(mob);
         Destroy(mob.gameObject);
-        
+
         // TODO: Create new one in another
         // TODO: Maybe wait some time before spawn
         SpawnMob();

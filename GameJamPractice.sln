@@ -2,6 +2,14 @@
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{B26D2CD3-6C86-A1F8-2B03-908165B03194}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavMeshComponentsExamples", "NavMeshComponentsExamples.csproj", "{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavMeshComponents", "NavMeshComponents.csproj", "{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavMeshComponentsEditor", "NavMeshComponentsEditor.csproj", "{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavMeshComponentsExamplesEditor", "NavMeshComponentsExamplesEditor.csproj", "{880456E6-FF9B-FC5C-0E57-A6321190504F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,6 +20,22 @@ Global
 		{B26D2CD3-6C86-A1F8-2B03-908165B03194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B26D2CD3-6C86-A1F8-2B03-908165B03194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B26D2CD3-6C86-A1F8-2B03-908165B03194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58732C5C-4C08-7730-F2B3-18B17B5DD3F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0E794D-5FAA-1B72-DE8C-5F29905A7C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DDCE21-5324-FF0C-EE01-8DEDC59F87C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880456E6-FF9B-FC5C-0E57-A6321190504F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880456E6-FF9B-FC5C-0E57-A6321190504F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880456E6-FF9B-FC5C-0E57-A6321190504F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880456E6-FF9B-FC5C-0E57-A6321190504F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
