@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class MobController : MonoBehaviour
@@ -7,7 +8,7 @@ public class MobController : MonoBehaviour
     public float ChangeDirectionDistance;
     
     private int _pointIndex = 0;
-    private MobPath _path;
+    private List<Vector3> _path;
     private bool _pathDone;
     private bool _initialized;
     private Rigidbody _rigidbody;
@@ -18,10 +19,10 @@ public class MobController : MonoBehaviour
         GetComponent<Animator>().SetFloat("MoveSpeed", 1);
     }
 
-    public void Move(MobPath path)
+    public void Move(List<Vector3> path)
     {
         _path = path;
-        Agent.SetDestination(_path.Waypoints[0].position);
+        Agent.SetDestination(_path[0]);
         _initialized = true;
     }
 
@@ -30,20 +31,20 @@ public class MobController : MonoBehaviour
         if (!_initialized)
             return;
 
-        var targetRotation = Quaternion.LookRotation(_path.Waypoints[_pointIndex].position - _rigidbody.position);
+        var targetRotation = Quaternion.LookRotation(_path[_pointIndex] - _rigidbody.position);
         _rigidbody.rotation = Quaternion.RotateTowards(_rigidbody.rotation, targetRotation, 180 * Time.fixedDeltaTime);
         
         if (!_pathDone && IsDestinationReached())
         {
             Debug.Log("Destination reached: " + _pointIndex);
-            if (_path == null || _path.Waypoints == null)
+            if (_path == null || _path == null)
             {
                 Debug.LogError("Empty path");
             }
-            if (_pointIndex < _path.Waypoints.Count - 1)
+            if (_pointIndex < _path.Count - 1)
             {
                 _pointIndex++;
-                Agent.SetDestination(_path.Waypoints[_pointIndex].position);
+                Agent.SetDestination(_path[_pointIndex]);
             }
             else
             {

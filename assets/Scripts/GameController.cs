@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using MeatResources;
 using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
@@ -19,8 +21,13 @@ public class GameController : MonoBehaviour
 
     [Header("Mobs")]
     public GameObject MobPrefab;
-    public List<Spawner> MobSpawners;
+    public GameObject WaypointsHolder;
+    public GameObject MobSpawnersHolder;
     private readonly List<MobController> _mobs = new List<MobController>();
+    private Coroutine _spawnCoroutine;
+    private Vector3[] _waypoints;
+    private Vector3[] _mobSpawners;
+    
 
     [Header("Players")]
     [Range(1,4)] public int PlayersCount;
@@ -36,7 +43,6 @@ public class GameController : MonoBehaviour
     [Range(1, 10)] public float MeatForce;
     private readonly List<Meat> _meats = new List<Meat>();
 
-    private Coroutine _spawnCoroutine;
 
     private void Awake()
     {
@@ -69,12 +75,29 @@ public class GameController : MonoBehaviour
 
     private void StartNewGame()
     {
+        FillWaypoints();
+        
         Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, _players);
 
         // TODO: Start mobs spawning
         
         _spawnCoroutine = StartCoroutine(SpawnCoroutine());
         // TODO: Start laser spawning
+    }
+
+    private void FillWaypoints()
+    {
+        _waypoints = WaypointsHolder
+            .GetComponentsInChildren<Transform>()
+            .Where(t => t != WaypointsHolder.transform)
+            .Select(t => t.position)
+            .ToArray();
+        
+        _mobSpawners = MobSpawnersHolder
+            .GetComponentsInChildren<Transform>()
+            .Where(t => t != MobSpawnersHolder.transform)
+            .Select(t => t.position)
+            .ToArray();
     }
     
     public void AddMeat()
@@ -107,11 +130,23 @@ public class GameController : MonoBehaviour
         var mob = go.GetComponent<MobController>();
         _mobs.Add(mob);
 
-        var spawnerIndex = Random.Range(0, MobSpawners.Count);
-        var spawner = MobSpawners[spawnerIndex];
-        var pathIndex = Random.Range(0, spawner.Paths.Count);
-        var path = spawner.Paths[pathIndex];
-        mob.Agent.Warp(spawner.SpawnPoint.position);
+        var spawnerIndex = Random.Range(0, _mobSpawners.Length);
+        var spawner = _mobSpawners[spawnerIndex];
+        mob.Agent.Warp(spawner);
+        var path = new List<Vector3>();
+
+        for (var i = 0; i < Random.Range(3, 10); i++)
+        {
+            Vector3 point;
+            do
+            {
+                point = _waypoints[Random.Range(0, _waypoints.Length)];
+            } while (path.Contains(point));
+            path.Add(point);
+        }
+        // Add exit point
+        path.Add(_mobSpawners[Random.Range(0, _mobSpawners.Length)]);
+        
         mob.Move(path);
     }
 
