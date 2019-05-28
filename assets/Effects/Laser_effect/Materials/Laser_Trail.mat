@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Laser_Roks_mtl
+  m_Name: Laser_GroundParticles_mtl
   m_Shader: {fileID: 4800000, guid: 6510920ca8b18e3498a988b6566a0517, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _COLOROVERLAY_ON
   m_LightmapFlags: 0
@@ -28,13 +28,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 97a5b950fe4e81141b999c2951ac8dd4, type: 3}
+        m_Scale: {x: 0.5, y: 1}
+        m_Offset: {x: 0.5, y: 0}
     m_Floats:
     - HARDWARE_CullMode: 2
-    - HARDWARE_ZTest: 4
-    - HARDWARE_ZWrite: 1
+    - HARDWARE_ZTest: 8
+    - HARDWARE_ZWrite: 0
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0

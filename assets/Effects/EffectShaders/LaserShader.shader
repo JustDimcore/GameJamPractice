@@ -4,9 +4,8 @@
     {
         _MainTex ("MainTex", 2D) = "white" {}
         _Ramp ("Ramp", 2D) = "white" {}   
-        _Color("Color", Color) = (1,0,0,1)
-        _Intensity("VO Intensity", Float) = 1
-        _Speed("Speed", Float) = 1        
+        _Intensity("VO Intensity", Range(0,0.2)) = 0
+        _Speed("Speed", Range(0,20)) = 0
     }
     SubShader
     {
@@ -25,7 +24,6 @@
             
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform sampler2D _Ramp; uniform float4 _Ramp_ST;
-            half4 _Color;
             half _Intensity;
             half _Speed;
             
@@ -57,9 +55,9 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = _Color * tex2D(_MainTex, float2(i.uv.x , i.uv.y + _Time.x * _Speed));
+                fixed4 col = tex2D(_MainTex, float2(i.uv.x , i.uv.y + _Time.x * _Speed));
                 //fixed4 col = tex2D(_MainTex, i.uv);
-                half4 _Ramp_var = tex2D(_Ramp, float2(TRANSFORM_TEX(col, _Ramp).x  + _Time.y * _Speed /2, TRANSFORM_TEX(col, _Ramp).y));
+                half4 _Ramp_var = tex2D(_Ramp, float2(TRANSFORM_TEX(col, _Ramp).x  + _Time.y * _Speed /4, TRANSFORM_TEX(col, _Ramp).y));
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return _Ramp_var;
             }
