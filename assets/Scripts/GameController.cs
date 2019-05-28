@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour
     private Coroutine _spawnCoroutine;
     private Vector3[] _waypoints;
     private Vector3[] _mobSpawners;
-    
 
     [Header("Players")]
     [Range(1,4)] public int PlayersCount;
@@ -43,6 +42,9 @@ public class GameController : MonoBehaviour
     [Range(1, 10)] public float MeatForce;
     private readonly List<Meat> _meats = new List<Meat>();
 
+    [Header("Laser")] 
+    public Laser[] Lasers;
+    
 
     private void Awake()
     {
@@ -63,13 +65,17 @@ public class GameController : MonoBehaviour
     private void ClearOldGame()
     {
         Players.Clear(_players);
+
         _mobs.Clear();
         if(_spawnCoroutine != null)
             StopCoroutine(_spawnCoroutine);
 
-        // TODO: Remove mobs
         Meats.Clear(_meats);
-        // TODO: Disable laser
+
+        if (Lasers != null)
+            foreach (var laser in Lasers)
+                laser.gameObject.SetActive(false);
+
         // TODO: Clear statistics
     }
 
@@ -79,10 +85,13 @@ public class GameController : MonoBehaviour
         
         Players.Spawn(PlayersCount, PlayerPrefab, PlayersSpawnPoints, _players);
 
-        // TODO: Start mobs spawning
-        
+        // Mobs spawning
         _spawnCoroutine = StartCoroutine(SpawnCoroutine());
+        
         // TODO: Start laser spawning
+        if (Lasers != null)
+            foreach (var laser in Lasers)
+                laser.gameObject.SetActive(true);
     }
 
     private void FillWaypoints()
@@ -117,12 +126,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void RecreateCharacter(int playerIndex)
-    {
-        // TODO: Remove old/disable controlling
-        // TODO: Create new
-    }
-
     [ContextMenu("SpawnMob")]
     private void SpawnMob()
     {
@@ -153,11 +156,7 @@ public class GameController : MonoBehaviour
     // Remove mob when he comes to a door
     public void OnMobExit(MobController mob)
     {
-        // TODO: Remove character, which comes to door
         _mobs.Remove(mob);
         Destroy(mob.gameObject);
-
-        // TODO: Create new one in another
-        // TODO: Maybe wait some time before spawn
     }
 }
