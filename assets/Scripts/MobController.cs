@@ -35,8 +35,7 @@ public class MobController : MonoBehaviour
         _rigidbody.rotation = Quaternion.RotateTowards(_rigidbody.rotation, targetRotation, 180 * Time.fixedDeltaTime);
         
         if (!_pathDone && IsDestinationReached())
-        {
-            Debug.Log("Destination reached: " + _pointIndex);
+        {           
             if (_path == null || _path == null)
             {
                 Debug.LogError("Empty path");
@@ -49,8 +48,7 @@ public class MobController : MonoBehaviour
             else
             {
                 _pathDone = true;
-                GameController.Instance.OnMobExit(this);
-                Debug.Log("Path done");
+                GameController.Instance.OnMobExit(this);                
             }
         }
     }

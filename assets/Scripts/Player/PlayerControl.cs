@@ -35,7 +35,58 @@ namespace Player
         private void Update()
         {
             Move();
-            //JumpingAndLanding();
+            JumpingAndLanding();
+        }        
+
+        private void Move()
+        {
+            float v = PlayerInput.Vertical(playerId);
+            float h = PlayerInput.Horizontal(playerId);
+
+            _currentV = Mathf.Lerp(_currentV, v, Time.deltaTime * TurnSensitivity);
+            _currentH = Mathf.Lerp(_currentH, h, Time.deltaTime * TurnSensitivity);
+
+            Vector3 direction = _cameraTransform.forward * _currentV + _cameraTransform.right * _currentH;
+
+            float directionLength = direction.magnitude;
+            direction.y = 0;
+            direction = direction.normalized * directionLength;
+
+            if (direction != Vector3.zero)
+            {
+                _currentDirection = Vector3.Lerp(_currentDirection, direction, Time.deltaTime * TurnSensitivity);
+
+                transform.rotation = Quaternion.LookRotation(_currentDirection);
+                transform.position += _currentDirection * MoveSpeed * Time.deltaTime;
+
+                _animator.SetFloat("MoveSpeed", direction.magnitude);                
+            }
+            else
+            {
+                _animator.SetFloat("MoveSpeed", 0f);
+            }
+        }
+
+        #region Jumping
+
+        private void JumpingAndLanding()
+        {
+            //_animator.SetBool("Grounded", _isGrounded);
+
+            var jumpCooldownIsOver = (Time.time - _jumpTimeStamp) >= MinJumpInterval;
+            if (jumpCooldownIsOver && _isGrounded && PlayerInput.Jump(playerId))
+            {
+                _jumpTimeStamp = Time.time;
+                _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            }
+
+            //if (!_wasGrounded && _isGrounded)
+            //    _animator.SetTrigger("Land");
+
+            //if (!_isGrounded && _wasGrounded)
+            //    _animator.SetTrigger("Jump");
+
+            _wasGrounded = _isGrounded;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -92,53 +143,6 @@ namespace Player
                 _isGrounded = false;
         }
 
-        private void Move()
-        {
-            float v = InputController.Vertical(playerId);
-            float h = InputController.Horizontal(playerId);
-
-            _currentV = Mathf.Lerp(_currentV, v, Time.deltaTime * TurnSensitivity);
-            _currentH = Mathf.Lerp(_currentH, h, Time.deltaTime * TurnSensitivity);
-
-            Vector3 direction = _cameraTransform.forward * _currentV + _cameraTransform.right * _currentH;
-
-            float directionLength = direction.magnitude;
-            direction.y = 0;
-            direction = direction.normalized * directionLength;
-
-            if (direction != Vector3.zero)
-            {
-                _currentDirection = Vector3.Slerp(_currentDirection, direction, Time.deltaTime * TurnSensitivity);
-
-                transform.rotation = Quaternion.LookRotation(_currentDirection);
-                transform.position += _currentDirection * MoveSpeed * Time.deltaTime;
-
-                _animator.SetFloat("MoveSpeed", direction.magnitude);
-            }
-            else
-            {
-                _animator.SetFloat("MoveSpeed", 0f);
-            }
-        }
-
-        private void JumpingAndLanding()
-        {
-            _animator.SetBool("Grounded", _isGrounded);
-
-            var jumpCooldownIsOver = (Time.time - _jumpTimeStamp) >= MinJumpInterval;
-            if (jumpCooldownIsOver && _isGrounded && InputController.Jump(playerId))
-            {
-                _jumpTimeStamp = Time.time;
-                _rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-            }
-
-            if (!_wasGrounded && _isGrounded)
-                _animator.SetTrigger("Land");
-
-            if (!_isGrounded && _wasGrounded)
-                _animator.SetTrigger("Jump");
-
-            _wasGrounded = _isGrounded;
-        }
+        #endregion Jumping
     }
 }
